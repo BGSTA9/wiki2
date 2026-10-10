@@ -1,6 +1,7 @@
 import hashlib
 import pytest
 
+from typing import Iterator
 from typing import Any
 from wiki2shards.acquire.download import DownloadError, fetch, parse_sha1sums
 
@@ -12,12 +13,12 @@ class FakeTransport:
     def __init__(self, data: Any, honor_range: bool = True, fail_after: int | None = None) -> None:
         self.data, self.honor, self.fail_after, self.calls = data, honor_range, fail_after, []
 
-    def open(self, url, start):
+    def open(self, url: str, start: int) -> tuple[Iterator[bytes], bool]:
         self.calls.append(start)
         begin = start if self.honor else 0
         fail_after, self.fail_after = self.fail_after, None
 
-        def chunks():
+        def chunks() -> Iterator[bytes]:
             for i in range(begin, len(self.data), 10):
                 if fail_after is not None and i - begin >= fail_after:
                     raise OSError("connection reset")
