@@ -4,7 +4,7 @@ from helpers.build import fixture_config
 from wiki2shards.config import BuildConfig, ConfigError, load_build_config, load_mix_config
 
 
-def test_fixture_config_loads():
+def test_fixture_config_loads() -> None:
     cfg = load_build_config("configs/fixture.yaml")
     assert cfg.pack.row_len == 65 and cfg.pack.effective_last_row == "drop"
     assert cfg.clean.soft_filters.enabled() == [
