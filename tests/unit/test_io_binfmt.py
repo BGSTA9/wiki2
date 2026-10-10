@@ -44,7 +44,7 @@ def _sample(n_rows: int = 3) -> tuple[IdxHeader, Segments]:
     return hdr, seg
 
 
-def test_idx_roundtrip():
+def test_idx_roundtrip() -> None:
     hdr, seg = _sample()
     raw = encode_idx(hdr, seg)
     assert len(raw) == idx_size(3, 5) == HEADER_SIZE + 8 * 4 + 20 * 5
