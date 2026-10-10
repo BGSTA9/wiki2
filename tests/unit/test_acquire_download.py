@@ -1,6 +1,6 @@
 import hashlib
 import pytest
-
+from pathlib import Path
 from typing import Iterator
 from typing import Any
 from wiki2shards.acquire.download import DownloadError, fetch, parse_sha1sums
@@ -28,7 +28,9 @@ class FakeTransport:
 
 
 @pytest.mark.parametrize("honor", [True, False])
-def test_fetch_resumes_and_verifies(tmp_path, monkeypatch, honor):
+def test_fetch_resumes_and_verifies(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, honor: bool
+) -> None:
     monkeypatch.setattr("time.sleep", lambda s: None)
     data = bytes(range(256)) * 4
     sha1 = hashlib.sha1(data).hexdigest()
