@@ -69,7 +69,7 @@ def test_idx_roundtrip() -> None:
     assert decode_idx(higher_minor)[0].version_minor == 7  # readers accept higher minors
 
 
-def test_dtype_guard():
+def test_dtype_guard() -> None:
     ids = np.array([1, 2, 70_000], dtype=np.int64)
     assert int(ids.astype(U2)[-1]) == 4464  # what a plain cast would silently store
     with pytest.raises(DtypeRangeError):
