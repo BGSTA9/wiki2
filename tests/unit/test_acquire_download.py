@@ -8,7 +8,7 @@ from wiki2shards.acquire.download import DownloadError, fetch, parse_sha1sums
 class FakeTransport:
     """In-memory server: honors Range only if asked to; fails once mid-file if asked to."""
 
-    def __init__(self, data, honor_range=True, fail_after=None) -> None:
+    def __init__(self, data: Any, honor_range: bool = True, fail_after: int | None = None) -> None:
         self.data, self.honor, self.fail_after, self.calls = data, honor_range, fail_after, []
 
     def open(self, url, start):
