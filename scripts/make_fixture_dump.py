@@ -229,7 +229,8 @@ def article_wikitext(seed: str, k: int) -> str:
         '{| class="wikitable"\n|-\n! Year !! Value\n|-\n| 1900 || 12\n|}\n'
         f"=== Later period ===\n{p3} Visit [http://example.org/{k} the archive] or http://example.net.\n"
         "== References ==\n<references />\n"
-        f"== External links ==\n* [http://example.com/{k} Official site]\n"
+        #f"== External links ==\n*[http://example.com/{k} Official site]\n"
+        f"== External links ==\n[http://example.com/-{k} Official site]\n"
         f"[[Category:Fixture articles]]\n[[de:Beispiel {k}]]\n[[fr:Exemple {k}]]\n"
     )
 
