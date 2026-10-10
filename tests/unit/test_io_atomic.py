@@ -1,12 +1,12 @@
 import subprocess
 import sys
-
+from pathlib import Path
 import pytest
 
 from wiki2shards.io.atomic import atomic_open, atomic_write_bytes
 
 
-def test_atomic_write(tmp_path):
+def test_atomic_write(tmp_path) -> None:
     final = tmp_path / "out.bin"
     with pytest.raises(RuntimeError), atomic_open(final) as f:
         f.write(b"partial")
