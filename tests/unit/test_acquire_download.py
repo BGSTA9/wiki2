@@ -41,11 +41,11 @@ def test_fetch_resumes_and_verifies(
     assert not (tmp_path / ".x.bin.part").exists()
 
 
-def test_fetch_rejects_bad_sha1(tmp_path):
+def test_fetch_rejects_bad_sha1(tmp_path: Path) -> None:
     with pytest.raises(DownloadError):
         fetch("fake://y", tmp_path / "y.bin", FakeTransport(b"abc"), "0" * 40)
     assert not (tmp_path / "y.bin").exists()
 
 
-def test_parse_sha1sums():
+def test_parse_sha1sums() -> None:
     assert parse_sha1sums("ABC  a.bz2\ndef *b.txt\n") == {"a.bz2": "abc", "b.txt": "def"}
