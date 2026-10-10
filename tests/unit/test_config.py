@@ -1,6 +1,6 @@
 import pytest
 from helpers.build import fixture_config
-
+from typing import Any
 from wiki2shards.config import BuildConfig, ConfigError, load_build_config, load_mix_config
 
 
@@ -25,7 +25,7 @@ def test_fixture_config_loads() -> None:
         {"select": {"val_per_10k": 10_001}},
     ],
 )
-def test_config_rejects(patch):
+def test_config_rejects(patch: dict[str, Any]) -> None:
     base = {
         "name": "x",
         "source": {"wiki": "x", "date": "20260901"},
