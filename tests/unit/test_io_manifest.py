@@ -2,6 +2,7 @@ import json
 
 import pytest
 
+from typing import Any
 from wiki2shards.io.hashing import canonical_json_pretty
 from wiki2shards.io.manifest import (
     Manifest,
@@ -14,7 +15,7 @@ from wiki2shards.io.manifest import (
 SHA = "ab" * 32
 
 
-def sample() -> dict:
+def sample() -> dict[str, Any]:
     shard = {
         "index": 0,
         "n_rows": 2,
