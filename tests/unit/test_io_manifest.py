@@ -2,6 +2,7 @@ import json
 
 import pytest
 
+from pathlib import Path
 from typing import Any
 from wiki2shards.io.hashing import canonical_json_pretty
 from wiki2shards.io.manifest import (
@@ -77,7 +78,7 @@ def sample() -> dict[str, Any]:
     }
 
 
-def test_manifest_roundtrip_and_versions(tmp_path):
+def test_manifest_roundtrip_and_versions(tmp_path: Path) -> None:
     m = Manifest.model_validate(sample())
     dataset_id = write_manifest(tmp_path, m)
     m2, id2 = read_manifest(tmp_path)
