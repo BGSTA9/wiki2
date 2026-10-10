@@ -9,7 +9,7 @@ from wiki2shards.io.hashing import (
 )
 
 
-def test_canonical_json():
+def test_canonical_json() -> None:
     a = {"b": [1, 2, {"z": None, "a": True}], "a": "é", "c": {"y": 1, "x": 2}}
     b = {"c": {"x": 2, "y": 1}, "a": "é", "b": [1, 2, {"a": True, "z": None}]}
     assert canonical_json(a) == canonical_json(b)
