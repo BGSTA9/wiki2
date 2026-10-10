@@ -1,0 +1,16 @@
+# Offline build of the generated fixture dump. Create the dump first:
+#   uv run python scripts/make_fixture_dump.py --out data/fixture_dump
+name: fixturewiki-20260901-fixture-s64
+source: {wiki: fixturewiki, date: "20260901", mirror: data/fixture_dump}
+workdir: data/work/fixturewiki-20260901
+output: data/datasets/fixturewiki-20260901-fixture-s64
+workers: 2
+extract: {unit_bytes: 1}            # one bz2 stream per unit -> 3 units, so workers matter
+clean:
+  drop_sections: [References, Notes, External links, See also, Further reading, Bibliography, Sources]
+  soft_filters: {min_words: 50, max_symbol_pct: 30, disambiguation: true, list_page: true}
+  disambiguation_templates: [disambiguation, disambig, dab, hndis, geodis]
+  language_codes_file: configs/language_codes.txt
+select: {policy: default, apply: [min_words, disambiguation], dedup: exact, val_per_10k: 2000}
+tokenizer: hf:tests/fixtures/tokenizer.json
+pack: {mode: concat, seq_len: 64, last_row: drop, shard_bytes: 16384, bfd_window: 100000}
