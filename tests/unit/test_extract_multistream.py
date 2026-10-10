@@ -13,7 +13,7 @@ from wiki2shards.extract.xmlpages import iter_pages
 NS = "{http://www.mediawiki.org/xml/export-0.11/}"
 
 
-def _paths(dumps:Path):
+def _paths(dumps: Path)-> tuple[Path, Path]:
     d = dumps / "fixturewiki" / "20260901"
     return (
         d / "fixturewiki-20260901-pages-articles-multistream.xml.bz2",
