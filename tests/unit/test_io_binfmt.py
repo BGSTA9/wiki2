@@ -1,5 +1,6 @@
 import numpy as np
 import pytest
+from typing import Tuple
 
 from wiki2shards.io.binfmt import (
     HEADER_SIZE,
@@ -19,7 +20,7 @@ from wiki2shards.io.binfmt import (
 )
 
 
-def _sample(n_rows=3):
+def _sample(n_rows: int = 3) -> tuple[IdxHeader, Segments]:
     seg = Segments(
         row_seg_ptr=np.array([0, 2, 3, 5][: n_rows + 1], dtype=np.uint64),
         doc_uid=np.array([11, 12, 12, 13, 14], dtype=np.uint64),
