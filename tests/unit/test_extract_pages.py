@@ -1,11 +1,12 @@
 import json
+from pathlib import Path
 
 from wiki2shards.extract.multistream import plan_units, stream_offsets
 from wiki2shards.extract.xmlpages import extract_unit
 from wiki2shards.io.records import iter_jsonl
 
 
-def test_page_filters(dumps, tmp_path):
+def test_page_filters(dumps: Path, tmp_path: Path) -> None:
     d = dumps / "fixturewiki" / "20260901"
     xml = d / "fixturewiki-20260901-pages-articles-multistream.xml.bz2"
     units = plan_units(
