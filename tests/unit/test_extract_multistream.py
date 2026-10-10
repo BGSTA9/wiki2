@@ -1,4 +1,5 @@
 import bz2
+from pathlib import Path
 
 from wiki2shards.extract.multistream import (
     local_name,
@@ -12,7 +13,7 @@ from wiki2shards.extract.xmlpages import iter_pages
 NS = "{http://www.mediawiki.org/xml/export-0.11/}"
 
 
-def _paths(dumps):
+def _paths(dumps:Path):
     d = dumps / "fixturewiki" / "20260901"
     return (
         d / "fixturewiki-20260901-pages-articles-multistream.xml.bz2",
