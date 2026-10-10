@@ -21,7 +21,7 @@ def _paths(dumps: Path)-> tuple[Path, Path]:
     )
 
 
-def test_multistream_fragment(dumps):
+def test_multistream_fragment(dumps: Path) -> None:
     xml, index = _paths(dumps)
     offsets = stream_offsets(index)
     size = xml.stat().st_size
