@@ -62,3 +62,7 @@ ignore_missing_imports = true
 
 [tool.setuptools.package-data]
 "wiki2shards" = ["py.typed"]
+
+[[tool.mypy.overrides]]
+module = "wiki2shards.*"
+ignore_missing_imports = true
