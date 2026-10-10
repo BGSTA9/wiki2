@@ -21,7 +21,7 @@ def test_canonical_json() -> None:
             canonical_json(bad)
 
 
-def test_doc_uid_golden():
+def test_doc_uid_golden() -> None:
     # Pinned values: a built-in hash() implementation would fail here in-process.
     assert uid_hex(doc_uid("enwiki", 12)) == "6b94dc5bf1a07c42"
     assert uid_hex(doc_uid("simplewiki", 12)) == "0e055fda4b07921c"
