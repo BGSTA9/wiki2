@@ -2,7 +2,7 @@ import pytest
 from helpers.build import fixture_config
 from typing import Any
 from wiki2shards.config import BuildConfig, ConfigError, load_build_config, load_mix_config
-
+from pathlib import Path
 
 def test_fixture_config_loads() -> None:
     cfg = load_build_config("configs/fixture.yaml")
@@ -40,7 +40,7 @@ def test_config_rejects(patch: dict[str, Any]) -> None:
         BuildConfig.model_validate(base)
 
 
-def test_config_hash_ignores_execution_fields(tmp_path, dumps):
+def test_config_hash_ignores_execution_fields(tmp_path: Path, dumps: Path) -> None:
     gpt2 = {"tokenizer": "tiktoken:gpt2"}  # hashing the config never loads the tokenizer
     a = fixture_config(tmp_path / "a", dumps, **gpt2)
     b = fixture_config(tmp_path / "b", dumps, workers=7, **gpt2)
