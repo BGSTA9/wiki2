@@ -49,7 +49,7 @@ def test_config_hash_ignores_execution_fields(tmp_path: Path, dumps: Path) -> No
     assert a.config_sha256() != c.config_sha256()
 
 
-def test_mix_config_errors(tmp_path):
+def test_mix_config_errors(tmp_path: Path) -> None:
     p = tmp_path / "m.yaml"
     p.write_text("seed: 1\nsources:\n  - {name: a, path: x, weight: 0}\n")
     with pytest.raises(ConfigError):
