@@ -9,7 +9,7 @@ def test_hf_fingerprint_is_canonical() -> None:
     assert fingerprint_hf_json(a) == fingerprint_hf_json(b)
 
 
-def test_fingerprint_goldens():
+def test_fingerprint_goldens() -> None:
     ranks = {bytes([i]): i for i in range(256)} | {b"ab": 256}
     assert fingerprint_tiktoken("tiny", r"\S+|\s+", {"<|endoftext|>": 257}, ranks) == (
         "57fd155206ade5e0dff18a8ccb6e13b457bf88fab53aa5385d196a10d4491fb4"
