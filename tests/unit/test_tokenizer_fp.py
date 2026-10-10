@@ -3,7 +3,7 @@ import json
 from wiki2shards.tokenize.base import fingerprint_hf_json, fingerprint_tiktoken
 
 
-def test_hf_fingerprint_is_canonical():
+def test_hf_fingerprint_is_canonical() -> None:
     a = json.dumps({"b": 1, "a": [1, 2]}).encode()
     b = json.dumps({"a": [1, 2], "b": 1}, indent=4).encode()
     assert fingerprint_hf_json(a) == fingerprint_hf_json(b)
