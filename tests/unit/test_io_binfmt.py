@@ -1,7 +1,6 @@
 import numpy as np
 import pytest
 
-
 from wiki2shards.io.binfmt import (
     HEADER_SIZE,
     U2,
