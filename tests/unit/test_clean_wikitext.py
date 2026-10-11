@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -16,5 +17,5 @@ def test_golden_has_enough_cases() -> None:
 
 
 @pytest.mark.parametrize("case", CASES, ids=[c["name"] for c in CASES])
-def test_wikitext_golden(case):
+def test_wikitext_golden(case: Any) -> None:
     assert clean_wikitext(case["wikitext"], POLICY)[0] == case["expected"]
