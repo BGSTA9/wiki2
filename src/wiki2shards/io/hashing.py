@@ -1,7 +1,7 @@
 """Stable hashing, canonical JSON and document identity.
 
-Nothing here uses the built-in hash function: str hashing is salted per process (PYTHONHASHSEED), so any
-value derived from it would differ between runs. Everything persisted goes through sha256.
+Nothing here uses the built-in hash function: str hashing is salted per process (PYTHONHASHSEED), 
+so any value derived from it would differ between runs. Everything persisted goes through sha256.
 """
 
 from __future__ import annotations
