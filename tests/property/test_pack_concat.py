@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any, List, Literal
 
 import numpy as np
 from hypothesis import given
@@ -16,7 +16,7 @@ def materialize(lengths: Any) -> List[np.ndarray]:
             n in enumerate(lengths)]
 
 
-def fill(layout: Any, docs: Any):
+def fill(layout: Any, docs: Any) -> np.ndarray:
     rows = np.full((layout.n_rows, layout.row_len), -1, dtype=np.int64)
     for r, s, n, d, off in zip(
         layout.row, layout.start, layout.length, layout.doc, layout.doc_offset, strict=True
@@ -26,7 +26,9 @@ def fill(layout: Any, docs: Any):
 
 
 @given(lengths=DOCS, row_len=st.integers(2, 4097), last_row=st.sampled_from(["drop", "pad"]))
-def test_pack_concat_conservation(lengths, row_len, last_row):
+def test_pack_concat_conservation(
+    lengths: list[int], row_len: int, last_row: Literal["drop", "pad"]
+) -> None:
     lay = concat_layout(np.array(lengths), row_len, last_row)
     docs = materialize(lengths)
     stream = np.concatenate(docs)

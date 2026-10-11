@@ -1,4 +1,5 @@
 from collections import Counter
+from typing import Any, List
 
 import numpy as np
 from hypothesis import given
@@ -12,7 +13,7 @@ from wiki2shards.pack.bfd import bfd_layout
     row_len=st.integers(2, 129),
     window=st.integers(1, 64),
 )
-def test_pack_bfd_invariants(lengths, row_len, window):
+def test_pack_bfd_invariants(lengths: list[int], row_len: int, window: int) -> None:
     lay = bfd_layout(np.array(lengths), row_len, window)
     # every piece placed exactly once; a doc is split only if longer than a row
     placed = Counter(zip(lay.doc.tolist(), lay.piece.tolist(), strict=True))
@@ -40,7 +41,7 @@ def test_pack_bfd_invariants(lengths, row_len, window):
     )
 
 
-def test_bfd_best_fit_example():
+def test_bfd_best_fit_example() -> None:
     # pieces sorted by length desc: 6, 5, 4, 3, 2 into rows of 8 (ties -> lowest row index)
     lay = bfd_layout(np.array([5, 3, 6, 2, 4]), 8, 100)
     rows = {r: sorted(lay.doc[lay.row == r].tolist()) for r in range(lay.n_rows)}
