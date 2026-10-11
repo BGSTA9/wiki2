@@ -37,6 +37,6 @@ def test_normalize_idempotent(s: str) -> None:
     assert all(line == line.strip() for line in once.split("\n"))
 
 
-def test_spec_order_counterexample():
+def test_spec_order_counterexample() -> None:
     """SPEC's original order (NFC first) is not idempotent on this input; ours is."""
     assert normalize("e\x07\N{COMBINING ACUTE ACCENT}") == "\N{LATIN SMALL LETTER E WITH ACUTE}"
