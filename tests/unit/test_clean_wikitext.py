@@ -11,7 +11,7 @@ _cfg = CleanConfig()
 POLICY = Policy(_cfg.drop_sections, load_language_codes(_cfg.language_codes_file))
 
 
-def test_golden_has_enough_cases():
+def test_golden_has_enough_cases() -> None:
     assert len(CASES) >= 25
 
 
