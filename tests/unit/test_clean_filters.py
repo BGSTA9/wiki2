@@ -1,7 +1,7 @@
 from wiki2shards.clean import filters
 
 
-def test_filters():
+def test_filters() -> None:
     assert filters.min_words("one two three", 3) == ("min_words", True)
     assert filters.min_words("one two", 3) == ("min_words", False)
     assert filters.max_symbol_pct("ab@@", 50) == ("max_symbol_pct", True)
