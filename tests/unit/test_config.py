@@ -1,8 +1,11 @@
+from pathlib import Path
+from typing import Any
+
 import pytest
 from helpers.build import fixture_config
-from typing import Any
+
 from wiki2shards.config import BuildConfig, ConfigError, load_build_config, load_mix_config
-from pathlib import Path
+
 
 def test_fixture_config_loads() -> None:
     cfg = load_build_config("configs/fixture.yaml")
