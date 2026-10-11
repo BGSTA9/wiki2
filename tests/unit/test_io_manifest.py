@@ -1,9 +1,9 @@
 import json
+from pathlib import Path
+from typing import Any
 
 import pytest
 
-from pathlib import Path
-from typing import Any
 from wiki2shards.io.hashing import canonical_json_pretty
 from wiki2shards.io.manifest import (
     Manifest,
