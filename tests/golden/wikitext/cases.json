@@ -1,0 +1,162 @@
+[
+ {
+  "name": "ref_inline",
+  "wikitext": "Paris is large.<ref>Smith 2001, p. 4.</ref> It is old.",
+  "expected": "Paris is large. It is old."
+ },
+ {
+  "name": "ref_named_selfclosing",
+  "wikitext": "A claim.<ref name=\"a\" /> Another.<ref name=\"b\">Jones.</ref>",
+  "expected": "A claim. Another."
+ },
+ {
+  "name": "references_tag",
+  "wikitext": "Body text.\n<references />",
+  "expected": "Body text."
+ },
+ {
+  "name": "template_simple",
+  "wikitext": "{{Use dmy dates}}Text after.",
+  "expected": "Text after."
+ },
+ {
+  "name": "template_nested",
+  "wikitext": "Start {{outer|a={{inner|b}}|c}} end.",
+  "expected": "Start end."
+ },
+ {
+  "name": "infobox_multiline",
+  "wikitext": "{{Infobox person\n| name = Ada\n| born = 1815\n}}\n'''Ada''' was a writer.",
+  "expected": "Ada was a writer."
+ },
+ {
+  "name": "cite_in_ref",
+  "wikitext": "Fact.<ref>{{cite web|url=http://x.org|title=X}}</ref> Done.",
+  "expected": "Fact. Done."
+ },
+ {
+  "name": "wikitable",
+  "wikitext": "Before.\n{| class=\"wikitable\"\n|-\n! A !! B\n|-\n| 1 || 2\n|}\nAfter.",
+  "expected": "Before.\n\nAfter."
+ },
+ {
+  "name": "file_caption",
+  "wikitext": "[[File:Map.png|thumb|A map of [[Europe]]]]Text.",
+  "expected": "Text."
+ },
+ {
+  "name": "image_prefix",
+  "wikitext": "[[Image:Old.jpg|left|200px|caption]]Text.",
+  "expected": "Text."
+ },
+ {
+  "name": "media_prefix",
+  "wikitext": "Listen: [[Media:Sound.ogg|audio]] here.",
+  "expected": "Listen: here."
+ },
+ {
+  "name": "category",
+  "wikitext": "Text.\n[[Category:Rivers]]\n[[Category:Europe|Sort]]",
+  "expected": "Text."
+ },
+ {
+  "name": "category_leading_colon",
+  "wikitext": "See [[:Category:Rivers]] for more.",
+  "expected": "See for more."
+ },
+ {
+  "name": "interlanguage",
+  "wikitext": "Text.\n[[de:Paris]]\n[[fr:Paris]]\n[[simple:Paris]]",
+  "expected": "Text."
+ },
+ {
+  "name": "colon_title_not_language",
+  "wikitext": "The film [[Ali: Fear Eats the Soul]] was made in 1974.",
+  "expected": "The film Ali: Fear Eats the Soul was made in 1974."
+ },
+ {
+  "name": "piped_link",
+  "wikitext": "The [[Paris|capital]] of [[France]].",
+  "expected": "The capital of France."
+ },
+ {
+  "name": "external_titled",
+  "wikitext": "See [http://example.com the site] for details.",
+  "expected": "See the site for details."
+ },
+ {
+  "name": "external_bare",
+  "wikitext": "Visit http://example.com today.",
+  "expected": "Visit today."
+ },
+ {
+  "name": "external_bracket_untitled",
+  "wikitext": "Reference [http://example.com] here.",
+  "expected": "Reference here."
+ },
+ {
+  "name": "math",
+  "wikitext": "The formula <math>E = mc^2</math> is famous.",
+  "expected": "The formula is famous."
+ },
+ {
+  "name": "chem_score_timeline",
+  "wikitext": "A <chem>H2O</chem> B <score>c d e</score> C <timeline>x</timeline> D.",
+  "expected": "A B C D."
+ },
+ {
+  "name": "gallery_imagemap",
+  "wikitext": "Pics:\n<gallery>\nA.jpg|one\n</gallery>\n<imagemap>B.png</imagemap>\nEnd.",
+  "expected": "Pics:\n\nEnd."
+ },
+ {
+  "name": "comment",
+  "wikitext": "Visible <!-- hidden note --> text.",
+  "expected": "Visible text."
+ },
+ {
+  "name": "entities",
+  "wikitext": "Fish &amp; chips&nbsp;cost &pound;5 &mdash; cheap.",
+  "expected": "Fish & chips cost £5 — cheap."
+ },
+ {
+  "name": "bold_italic",
+  "wikitext": "'''Bold''' and ''italic'' and '''''both'''''.",
+  "expected": "Bold and italic and both."
+ },
+ {
+  "name": "boilerplate_sections",
+  "wikitext": "Intro.\n== History ==\nOld.\n== See also ==\n* [[Other]]\n== References ==\n<references />\n== External links ==\n* [http://a.example A]\n== Notes ==\nn",
+  "expected": "Intro.\nHistory\nOld."
+ },
+ {
+  "name": "subsection_of_dropped",
+  "wikitext": "Intro.\n== Further reading ==\n=== Books ===\nA book.\n== Legacy ==\nKept.",
+  "expected": "Intro.\nLegacy\nKept."
+ },
+ {
+  "name": "level3_named_like_boilerplate",
+  "wikitext": "Intro.\n== Work ==\n=== References ===\nThis level-3 section is kept.",
+  "expected": "Intro.\nWork\nReferences\nThis level-3 section is kept."
+ },
+ {
+  "name": "lists",
+  "wikitext": "Items:\n* one\n* two\n# first\n; term : definition",
+  "expected": "Items:\none\ntwo\nfirst\nterm definition"
+ },
+ {
+  "name": "whitespace_and_blank_lines",
+  "wikitext": "A   lot\t\tof   space.\n\n\n\nNext   para.  ",
+  "expected": "A lot of space.\n\nNext para."
+ },
+ {
+  "name": "eos_literal",
+  "wikitext": "The literal <|endoftext|> stays text.",
+  "expected": "The literal <|endoftext|> stays text."
+ },
+ {
+  "name": "unicode_mix",
+  "wikitext": "Café 北京 שלום 🙂 naïve",
+  "expected": "Café 北京 שלום 🙂 naïve"
+ }
+]
