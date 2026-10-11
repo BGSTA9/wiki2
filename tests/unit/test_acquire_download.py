@@ -10,6 +10,7 @@ from wiki2shards.acquire.download import DownloadError, fetch, parse_sha1sums
 
 class FakeTransport:
     """In-memory server: honors Range only if asked to; fails once mid-file if asked to."""
+
     calls: list[Any]  # Explicit attribute type declaration (or list[Tuple[...]] if known)
 
     def __init__(self, data: Any, honor_range: bool = True, fail_after: int | None = None) -> None:
