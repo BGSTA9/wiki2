@@ -1,6 +1,5 @@
-import pytest
-
 import numpy as np
+import pytest
 
 
 from wiki2shards.io.binfmt import (
