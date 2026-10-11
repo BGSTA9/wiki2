@@ -4,6 +4,7 @@ Offline and deterministic: extract + clean the fixture with the library's own st
 then train a 1,000-token byte-level BPE on every cleaned document.
 
 Usage: uv run python scripts/make_fixture_tokenizer.py --dump data/fixture_dump
+shasum -a 256 tests/fixtures/tokenizer.json
 """
 
 from __future__ import annotations
