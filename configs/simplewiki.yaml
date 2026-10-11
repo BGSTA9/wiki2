@@ -1,0 +1,14 @@
+name: simplewiki-20260901-gpt2-s2048
+source: {wiki: simplewiki, date: "20260901"}   # use a dated dump that still exists on the mirror
+workdir: data/work/simplewiki-20260901
+output: data/datasets/simplewiki-20260901-gpt2-s2048
+workers: 8
+extract: {unit_mb: 32}
+clean:
+  drop_sections: [References, Notes, External links, See also, Further reading, Bibliography, Sources]
+  soft_filters: {min_words: 50, max_symbol_pct: 30, disambiguation: true, list_page: false}
+  disambiguation_templates: [disambiguation, disambig, dab, hndis, geodis]
+  language_codes_file: configs/language_codes.txt
+select: {policy: default, apply: [min_words, disambiguation], dedup: exact, val_per_10k: 50}
+tokenizer: tiktoken:gpt2
+pack: {mode: concat, seq_len: 2048, last_row: drop, shard_mb: 256, bfd_window: 100000}
