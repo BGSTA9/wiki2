@@ -1,6 +1,8 @@
+from typing import Tuple
+
 import numpy as np
 import pytest
-from typing import Tuple
+
 
 from wiki2shards.io.binfmt import (
     HEADER_SIZE,
