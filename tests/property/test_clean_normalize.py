@@ -28,7 +28,7 @@ TEXT = st.one_of(st.text(), st.lists(TRICKY, max_size=40).map("".join))
 
 
 @given(TEXT)
-def test_normalize_idempotent(s):
+def test_normalize_idempotent(s: str) -> None:
     once = normalize(s)
     assert normalize(once) == once
     assert unicodedata.normalize("NFC", once) == once
