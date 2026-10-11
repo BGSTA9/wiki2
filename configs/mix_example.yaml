@@ -1,0 +1,5 @@
+seed: 1234
+split: train
+sources:
+  - {name: enwiki,     path: data/datasets/enwiki-20260901-gpt2-s2048,     weight: 7}
+  - {name: simplewiki, path: data/datasets/simplewiki-20260901-gpt2-s2048, weight: 3}
