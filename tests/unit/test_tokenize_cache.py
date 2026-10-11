@@ -1,6 +1,8 @@
+from pathlib import Path
+
 import numpy as np
 import pytest
-from pathlib import Path
+
 from wiki2shards.io.binfmt import DtypeRangeError
 from wiki2shards.tokenize.base import load_tokenizer
 from wiki2shards.tokenize.cache import read_token_part, write_token_part

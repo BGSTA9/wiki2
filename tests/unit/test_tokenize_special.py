@@ -1,6 +1,7 @@
+from typing import Any
+
 import numpy as np
 import pytest
-from typing import Any
 from helpers.tok import ADAPTERS
 
 from wiki2shards.tokenize.cache import encode_docs, read_token_part, write_token_part
@@ -10,7 +11,7 @@ DOCS = ["plain text", "a <|endoftext|> b", "<|endoftext|>", "x<|endoftext|><|end
 
 @pytest.mark.parametrize("kind", sorted(ADAPTERS))
 def test_special_token_injection(kind: Any, tmp_path: Any) -> None:
-    tok = ADAPTERS[kind](),
+    tok: Any = ADAPTERS[kind]()
     encoded = encode_docs(tok, DOCS)
     for text, ids in zip(DOCS, encoded, strict=True):
         assert ids[-1] == tok.eos_id  # EOS appended

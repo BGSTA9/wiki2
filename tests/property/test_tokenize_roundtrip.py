@@ -1,5 +1,6 @@
-import pytest
 from typing import Any
+
+import pytest
 from helpers.tok import ADAPTERS
 from hypothesis import given
 from hypothesis import strategies as st
