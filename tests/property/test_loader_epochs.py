@@ -1,3 +1,5 @@
+from collections.abc import Sequence
+
 import numpy as np
 from hypothesis import given
 from hypothesis import strategies as st
@@ -10,7 +12,7 @@ from wiki2shards.loader.mixture import Sampler
     weights=st.lists(st.integers(1, 9), min_size=4, max_size=4),
     seed=st.integers(0, 2**64 - 1),
 )
-def test_epoch_coverage(sizes, weights, seed):
+def test_epoch_coverage(sizes: Sequence[int], weights: Sequence[int], seed: int) -> None:
     names = [f"s{i}" for i in range(len(sizes))]
     sampler = Sampler(names, sizes, weights[: len(sizes)], seed)
     horizon = 3 * max(sizes) * sum(sampler.schedule.weights)

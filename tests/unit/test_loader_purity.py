@@ -13,7 +13,7 @@ SCRIPT = (
 )
 
 
-def test_sample_at_pure():
+def test_sample_at_pure() -> None:
     here = [list(Sampler(*ARGS).sample_at(t)) for t in T]
     for hashseed in ("1", "2", "random"):
         env = {**os.environ, "PYTHONHASHSEED": hashseed}

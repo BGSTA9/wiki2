@@ -69,7 +69,7 @@ def write_synthetic_dataset(
                 "pad": header.n_pad_tokens,
             }
         )
-    pads = sum(s.pop("pad") for s in shards)
+    pads = sum(val for s in shards if isinstance(val := s.pop("pad", 0), int))
     empty = {
         "n_rows": 0,
         "n_tokens": 0,

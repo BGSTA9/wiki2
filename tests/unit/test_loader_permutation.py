@@ -8,7 +8,7 @@ from wiki2shards.loader.permutation import permutation
 KEYS = [(0, "a", 0), (1234, "enwiki", 1), (2**64 - 1, "x", 99)]
 
 
-def test_feistel_bijection():
+def test_feistel_bijection() -> None:
     for n in range(1, 2049):
         for seed, source, epoch in KEYS:
             p = permutation(n, seed, source, epoch)
@@ -19,7 +19,7 @@ def test_feistel_bijection():
             assert all(p(i) == int(v[i]) for i in check), (n, seed)
 
 
-def test_feistel_golden():
+def test_feistel_golden() -> None:
     cases = json.loads((Path(__file__).parents[1] / "golden/perm_v1.json").read_text())
     for c in cases:
         p = permutation(c["n"], c["seed"], c["source"], c["epoch"])
@@ -27,7 +27,7 @@ def test_feistel_golden():
         assert p.many(np.array(c["index"])).tolist() == c["perm"]
 
 
-def test_perm_quality():
+def test_perm_quality() -> None:
     n = 10**6
     v = permutation(n, 1234, "enwiki", 0).many(np.arange(n)).astype(np.int64)
     i = np.arange(n)

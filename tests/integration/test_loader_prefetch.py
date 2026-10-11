@@ -1,16 +1,18 @@
+from pathlib import Path
+
 import numpy as np
 from helpers.synth import write_synthetic_dataset
 
 from wiki2shards.loader import Dataset, Loader, Mixture
 
 
-def _mix(tmp_path):
+def _mix(tmp_path: Path) -> Mixture:
     a = Dataset.open(write_synthetic_dataset(tmp_path / "a", "a", n_rows=40), "train")
     b = Dataset.open(write_synthetic_dataset(tmp_path / "b", "b", n_rows=13), "train")
     return Mixture({"a": (a, 3), "b": (b, 1)}, seed=1234)
 
 
-def test_prefetch_state_is_consumed_not_produced(tmp_path):
+def test_prefetch_state_is_consumed_not_produced(tmp_path: Path) -> None:
     G = 8
     ref = Loader(_mix(tmp_path), G, prefetch=0, with_segments=True)
     expected = [ref.make_batch(b * G) for b in range(8)]
@@ -30,8 +32,11 @@ def test_prefetch_state_is_consumed_not_produced(tmp_path):
                 assert np.array_equal(getattr(got, field), getattr(expected[b], field)), field
 
 
-def test_loss_mask_and_segments(tmp_path):
+def test_loss_mask_and_segments(tmp_path: Path) -> None:
     b = Loader(_mix(tmp_path), 8, prefetch=0, with_segments=True).make_batch(0)
+    assert b.segment_ids is not None
+    assert b.loss_mask is not None
+
     for j in range(8):
         filled = int((b.segment_ids[j] >= 0).sum())
         assert b.tokens[j, filled - 1] == 0  # the piece ends with EOS

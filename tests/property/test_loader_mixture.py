@@ -1,3 +1,6 @@
+from collections.abc import Sequence
+from typing import Any
+
 import numpy as np
 from hypothesis import given
 from hypothesis import strategies as st
@@ -8,17 +11,17 @@ WEIGHTS = st.lists(st.integers(1, 100), min_size=1, max_size=8)
 EXPLICIT = [1, 3, 1, 1, 22, 22, 5, 1, 3, 3]  # largest-deficit-first lags 1.19 here
 
 
-def max_lag(seq, weights):
+def max_lag(seq: Sequence[Any], weights: Sequence[float]) -> float:
     D, t = sum(weights), np.arange(len(seq) + 1)
-    seq = np.asarray(seq)
+    seq_arr = np.asarray(seq)
     worst = 0
     for s, w in enumerate(weights):
-        c = np.concatenate([[0], np.cumsum(seq == s)])
+        c = np.concatenate([[0], np.cumsum(seq_arr == s)])
         worst = max(worst, int(np.max(np.abs(D * c - t * w))))
     return worst / D  # in samples
 
 
-def _check(weights):
+def _check(weights: Sequence[int]) -> None:
     w = reduce_weights(weights)
     D = sum(w)
     seq = simulate_edf(w, 2 * D)
@@ -29,13 +32,13 @@ def _check(weights):
 
 
 @given(WEIGHTS)
-def test_mixture_lag_exhaustive(weights):
+def test_mixture_lag_exhaustive(weights: Any) -> None:
     _check(weights)
     _check(EXPLICIT)
 
 
 @given(WEIGHTS)
-def test_mixture_random_access(weights):
+def test_mixture_random_access(weights: list[int]) -> None:
     sched = Schedule.build(weights)
     D = sched.D
     seq = simulate_edf(list(sched.weights), 3 * D)
@@ -45,7 +48,7 @@ def test_mixture_random_access(weights):
         assert k[s == src].tolist() == list(range(int(np.sum(s == src))))
 
 
-def test_iid_sampler_drifts():
+def test_iid_sampler_drifts() -> None:
     """Why EDF exists: i.i.d. sampling at w=0.3 drifts by tens of samples; EDF never by one."""
     rng = np.random.Generator(np.random.PCG64(1234))
     draws = rng.random(100_000) < 0.3
