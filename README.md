@@ -1,8 +1,7 @@
 # wiki2shards
 
-**wiki2shards** is a CPU-only Python package designed to turn Wikipedia database dumps into training-ready data shards for machine learning models (like GPT-2).
+**wiki2shards** is a CPU-only Python tool that takes raw Wikipedia text and turns it into clean, tokenized data ready to be fed into an machine learning models (like GPT-2).
 
-Our core philosophy is: **Correctness comes first, throughput second, features third.**
 
 This project exists to prevent "silent bugs" in pre-training data pipelines—such as data repeating after a crash, dataset mixtures drifting, or two identically configured builds yielding different results. Every feature and pipeline stage is strictly deterministic and backed by rigorous tests.
 
