@@ -1,6 +1,7 @@
 import subprocess
 import sys
 from pathlib import Path
+
 import pytest
 
 from wiki2shards.io.atomic import atomic_open, atomic_write_bytes
