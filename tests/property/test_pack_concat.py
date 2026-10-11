@@ -1,4 +1,4 @@
-from typing import Any, List, Literal
+from typing import Any, Literal, list
 
 import numpy as np
 from hypothesis import given
@@ -10,10 +10,9 @@ from wiki2shards.pack.concat import concat_layout
 DOCS = st.lists(st.integers(1, 5000), min_size=1, max_size=25)
 
 
-def materialize(lengths: Any) -> List[np.ndarray]:
+def materialize(lengths: Any) -> list[np.ndarray]:
     """Doc d's tokens: distinct values per (doc, position) so any misplacement is visible."""
-    return [np.arange(n, dtype=np.int64) + 10_000 * d for d, 
-            n in enumerate(lengths)]
+    return [np.arange(n, dtype=np.int64) + 10_000 * d for d, n in enumerate(lengths)]
 
 
 def fill(layout: Any, docs: Any) -> np.ndarray:
