@@ -1,0 +1,28 @@
+name: ci
+on:
+  push:
+  pull_request:
+  schedule: [{cron: "17 3 * * *"}]   # nightly: the full suite (crash matrix, SIGKILL resume)
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - name: lint and types
+        run: uv run ruff check . && uv run ruff format --check . && uv run mypy src
+      - name: no built-in hash() in src
+        run: "! grep -rnE '(^|[^_.a-zA-Z])hash\\(' src/"
+      - name: fast suite
+        if: github.event_name != 'schedule' && github.event_name != 'workflow_dispatch'
+        run: uv run pytest -q -m "not slow and not bench"
+      - name: full suite
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: uv run pytest -q -m "not bench"
