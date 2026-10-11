@@ -1,10 +1,10 @@
 import hashlib
-import pytest
 from pathlib import Path
-from typing import Iterator
+from collections.abc import Iterator
 from typing import Any
-from wiki2shards.acquire.download import DownloadError, fetch, parse_sha1sums
+import pytest
 
+from wiki2shards.acquire.download import DownloadError, fetch, parse_sha1sums
 
 class FakeTransport:
     """In-memory server: honors Range only if asked to; fails once mid-file if asked to."""
