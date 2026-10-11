@@ -1,4 +1,4 @@
-from typing import Any, Literal, list
+from typing import Any, Literal
 
 import numpy as np
 from hypothesis import given
